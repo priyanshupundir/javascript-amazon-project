@@ -102,7 +102,8 @@ cart.forEach((cartItem) => {
           </div>`;
 } );
 
-//nothing
+//nothing  
+//just adding nothing for the other day
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
