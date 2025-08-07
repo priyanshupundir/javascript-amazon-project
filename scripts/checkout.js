@@ -2,6 +2,7 @@ import { cart , removeFromCart} from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+import { deliveryOptions } from "../data/deliveryOptions.js";
 
 
 const today = dayjs();
@@ -102,10 +103,38 @@ cart.forEach((cartItem) => {
           </div>`;
 } );
 
-//nothing  
-//just adding nothing for the other day
-//day 3 nothing added today also 
-//day 4 of nothing its bad i should start doing something right now 
+function deliveryOptionsHTML() {
+  deliveryOptions.forEach((deliveryOptions) => {
+    const today = dayjs();
+    const deliveryDate = today.add(
+      deliveryOptions.deliveryDays,
+      'days'
+    );
+    const dateString = deliveryDate.format(
+      'dddd,MMMM D'
+    );
+    `
+      <div class="delivery-options">
+                <div class="delivery-options-title">
+                  Choose a delivery option:
+                </div>
+                <div class="delivery-option">
+                  <input type="radio" checked
+                    class="delivery-option-input"
+                    name="delivery-option-${matchingProduct.id}">
+                  <div>
+                    <div class="delivery-option-date">
+                      ${dateString}
+                    </div>
+                    <div class="delivery-option-price">
+                      FREE Shipping
+                    </div>
+                  </div>
+                </div>
+
+    `
+  });
+}
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
